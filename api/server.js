@@ -29,10 +29,10 @@ server.use(cors());
 server.use(
   session(
       {
-          name: "Authantication deneme",  //connect.sid
+          name: "cikolatacips",  //connect.sid
           secret: "Ilk defa yapiliyor",  //env'den alınacak.
           cookie: {
-              maxAge: 1000*60*60*3, //3 saat geçerli olacak
+              maxAge: 1000*60*60, //3 saat geçerli olacak
               httpOnly: false,
               secure: false,  //https üzerinden iletişim
           },

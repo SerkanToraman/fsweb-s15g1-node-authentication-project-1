@@ -9,7 +9,7 @@ async function bul() {
 /**
   verilen filtreye sahip tüm kullanıcıları içeren bir DİZİ ye çözümlenir
  */
-async function goreBul(filtre) {
+function goreBul(filtre) {
 
   return db('users').where(filtre);
 }

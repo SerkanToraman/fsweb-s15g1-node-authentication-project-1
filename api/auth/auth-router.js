@@ -57,10 +57,10 @@ router.post('/register',mw.usernameBostami,mw.sifreGecerlimi, async(req,res,next
     "message": "Geçersiz kriter!"
   }
  */
-  router.post('/login',mw.usernameVarmi, async(req,res,next)=>{
+  router.post('/login',mw.usernameVarmi,(req,res,next)=>{
     try {
     req.session.userData = req.userData;
-    res.json(`Hoşgeldin ${req.userData.username}`) 
+    res.json({message: `Hoşgeldin ${req.userData.username}!`}) 
 
     } catch (error) {
       next(error)
@@ -84,14 +84,14 @@ router.post('/register',mw.usernameBostami,mw.sifreGecerlimi, async(req,res,next
   }
  */
 
-router.get('/logout',async(req,res,next)=>{
+router.get('/logout',(req,res,next)=>{
   if(req.session && req.session.userData){
-    const { Name } = req.session.userData;
+    //const { Name } = req.session.userData;
     req.session.destroy(err=>{  //server tarafında session'ı destroy eder.
       if(err){
-        res.status(500).json({message: "Session error!..."})
+        res.status(422).json({message: "Session error!..."})
       }else{
-        res.set('Set-Cookie','Authantication deneme=; Path=/;Expires=Mon, 01 Jan 1970 11:33:31 GMT')//1.Client tarfında Cookie expire olsun diye geçmiş tarih verildi.
+        res.set('Set-Cookie','cikolatacips=; Path=/;Expires=Mon, 01 Jan 1970 11:33:31 GMT')//1.Client tarfında Cookie expire olsun diye geçmiş tarih verildi.
         res.json({message:"Çıkış yapildi"})
       }
     })

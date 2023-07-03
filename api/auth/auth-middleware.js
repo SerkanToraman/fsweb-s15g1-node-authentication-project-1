@@ -14,7 +14,7 @@ function sinirli(req,res,next) {
     if(req.session && req.session.userData){
       next();
     }else{
-      res.status(401).json({message:"Geçemezsiniz"})
+      res.status(401).json({message:"Geçemezsiniz!"})
     } 
   } catch (error) {
     next(error)
@@ -32,8 +32,8 @@ function sinirli(req,res,next) {
 */
 async function usernameBostami(req,res,next) {
   try {
-    const userIsExist = await userModel.goreBul({username:req.body.username});
-    !userIsExist ? res.status(422).json({message:'Username kullaniliyor'}):next();
+    const userIsExist = await userModel.goreBul({username:req.body.username}).first();
+    userIsExist ? res.status(422).json({message:'Username kullaniliyor'}):next();
     
   } catch (error) {
     next(error)
@@ -61,7 +61,11 @@ async function usernameVarmi(req,res,next) {
       }else{
         res.status(401).json({message:'Geçersiz kriter'})
       }
-      }
+      }else{
+      res.status(401).json({
+        "message": "Geçersiz kriter"
+      });
+    }
   }
 
 /*
