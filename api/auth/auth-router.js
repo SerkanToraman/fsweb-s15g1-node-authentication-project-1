@@ -61,6 +61,7 @@ router.post('/register',mw.usernameBostami,mw.sifreGecerlimi, async(req,res,next
     try {
     req.session.userData = req.userData;
     res.json({message: `Hoşgeldin ${req.userData.username}!`}) 
+    //req.session.save() logout sorunu icin kullandim ama ise yaramadi
 
     } catch (error) {
       next(error)

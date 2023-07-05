@@ -24,7 +24,9 @@ const KnexSessionStore = require('connect-session-knex')(session);
 //2 MiddleWares
 server.use(helmet());
 server.use(express.json());
-server.use(cors());
+
+
+
 
 server.use(
   session(
@@ -47,6 +49,14 @@ server.use(
           })
       }
   ))
+
+  var corsOptions = {
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+ }
+ server.use(cors(corsOptions))
+    
 //3 Routes
 
 // server.get("/", (req, res) => {
